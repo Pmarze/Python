@@ -23,13 +23,13 @@ class DerechaIzquierda(Scene):
     def construct(self):
         title = TextMobject(
         "Texto centrado \\\\"
-        " fade de abajo \\\\"
-        "hacia arriba")
+        " fade de derecha \\\\"
+        "a izquierda")
         self.play(
             FadeInFrom(title, RIGHT),   # de izquierda a derecha el parámetro es LEFT
             run_time=2                  # La duración de la animación es 2s
         )
-        self.wait(3)                    # Se mantiene en la animación 3s
+        self.wait(3)                    # Se mantiene en la escena durante 3s
 
 class Distribucion(Scene):
     def construct(self):
