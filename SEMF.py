@@ -32,22 +32,22 @@
 
 #######################################################################################################
 
-def f0(Z,A,MAS):                            # Función para calcular f0
-    return Z*(MAS[0]+MAS[2])+(A-Z)*MAS[1]
+def f0(Z,A,MAS):                                    # Función para calcular f0
+    return Z*(MAS[0]+MAS[2])+(A-Z)*MAS[1]           # resultado en MeV
 
-def f1(Z,A,CTE):                            # Función para calcular f1
-    return -CTE[0]*A
+def f1(Z,A,CTE):                                    # Función para calcular f1
+    return -CTE[0]*A                                # resultado en MeV
 
-def f2(Z,A,CTE):                            # Función para calcular f2
-    return CTE[1]*pow(A,2/3)
+def f2(Z,A,CTE):                                    # Función para calcular f2
+    return CTE[1]*pow(A,2/3)                        # resultado en MeV
 
-def f3(Z,A,CTE):                            # Función para calcular f3
-    return CTE[2]*(Z*(Z-1))/pow(A,1/3)
+def f3(Z,A,CTE):                                    # Función para calcular f3
+    return CTE[2]*(Z*(Z-1))/pow(A,1/3)              # resultado en MeV
 
-def f4(Z,A,CTE):                            # Función para calcular f4
-    return CTE[3]*pow(Z-A/2,2)/A
+def f4(Z,A,CTE):                                    # Función para calcular f4
+    return CTE[3]*pow(Z-A/2,2)/A                    # resultado en MeV
 
-def f5(Z,A,C,CTE):                          # Función para calcular f5
+def f5(Z,A,C,CTE):                                  # Función para calcular f5
     '''Función para calcular f5
     :param Z: Número atómico
     :param A: Número másico
@@ -62,42 +62,55 @@ def f5(Z,A,C,CTE):                          # Función para calcular f5
     if C==0:    # Z=par(impar), N=impar(par)
         return 0
     if C==1:    # Z,N impar
-        return CTE[4]/pow(A,1/2)
+        return CTE[4]/pow(A,1/2)                    # resultado en MeV
 
-def M(Z,A,CTE,MAS):                         # Función para calcular M(Z,A)
+def M(Z,A,CTE,MAS,SEL):                                 # Función para calcular M(Z,A)
     '''Función para calcular masa atómica
     :param Z: Número atómico
     :param A: Número másico
     :param CTE: vector de constantes a_i
     :param MAS: vector de constantes de masa
+    :param SEL: seleccionar resultados como 'TEX'=texto, 'TER'=terminal, 'VEC'=vector
     '''
     for i in range(-1,2):
-        if i==-1:
-            a='par'
-        if i==0:
-            a='pip'
-        if i==1:
-            a='imp'
         resultado=(f0(Z,A,MAS)+f1(Z,A,CTE)+f2(Z,A,CTE)+f3(Z,A,CTE)+f4(Z,A,CTE)+f5(Z,A,i,CTE))/MAS[3]
-        print('M(',Z,',',A,',',a,')=',resultado)
-    print()
+        if SEL=='TEX':
+            print(resultado)                            # resultado en dalton
+        elif SEL=='TER':  
+            print('M(',Z,',',A,')=',resultado)    # resultado en dalton
+        elif SEL=='VEC':
+            DATOS.append(resultado)
 
 #######################################################################################################
 
 # Datos extraidos de Nuclear and Particle physics(2009), Brian Martin
-cte1=(15.56,17.23,0.697,93.14,12.00) #MeV/c² (a1,a2,a3,a4,a5)=(av,as,ac,aa,ap) 
-mas1=(0.9383*10**3,0.9396*10**3,0.511,931.494) #MeV/c² (Mp,Mn,Me,u)
+cte1=(15.56,17.23,0.697,93.14,12.00) # MeV/c² (a1,a2,a3,a4,a5)=(av,as,ac,aa,ap) 
+mas1=(0.9383*10**3,0.9396*10**3,0.511,931.494) # MeV/c² (Mp,Mn,Me,u)
 
 # Datos extraidos de Wikipedia 28/03/21
-cte2=(15.80,18.30,0.714,23.20,12.00) #MeV/c² (a1,a2,a3,a4,a5)=(av,as,ac,aa,ap)
-mas2=(0.938282013*10**3,0.939565560*10**3,0.510998928,931.49410242) #Mev/c² (Mp,Mn,Me,u)
+cte2=(15.80,18.30,0.714,23.20,12.00) # MeV/c² (a1,a2,a3,a4,a5)=(av,as,ac,aa,ap)
+mas2=(0.938282013*10**3,0.939565560*10**3,0.510998928,931.49410242) # Mev/c² (Mp,Mn,Me,u)
+
+DATOS=[]
 
 Z=int(input('Z='))
 A=int(input('A='))
 
+# Ejemplo de sintáxis
+# TEXto
 print('Modelo B.Martin')
-M(Z,A,cte1,mas1)
+M(Z,A,cte1,mas1,'TEX')
+print()
+
+# TERminal
 print('Modelo Wikipedia')
-M(Z,A,cte2,mas2)
+M(Z,A,cte2,mas2,'TER')
+print()
+
+# VECtor
+M(Z,A,cte1,mas1,'VEC')
+M(Z,A,cte2,mas2,'VEC')
+print('Modelo B.Martin y Wikipedia')
+print(DATOS)
 
 #######################################################################################################
