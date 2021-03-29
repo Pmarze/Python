@@ -62,7 +62,7 @@ def f5(Z,A,C,CTE):                                  # Función para calcular f5
     if C==0:    # Z=par(impar), N=impar(par)
         return 0
     if C==1:    # Z,N impar
-        return CTE[4]/pow(A,1/2)                    # resultado en MeV
+        return CTE[4]/pow(A,1/2)                        # resultado en MeV
 
 def M(Z,A,CTE,MAS,SEL):                                 # Función para calcular M(Z,A)
     '''Función para calcular masa atómica
@@ -72,14 +72,14 @@ def M(Z,A,CTE,MAS,SEL):                                 # Función para calcular
     :param MAS: vector de constantes de masa
     :param SEL: seleccionar resultados como 'TEX'=texto, 'TER'=terminal, 'VEC'=vector
     '''
-    for i in range(-1,2):
+    for i in range(-1,2):                               # Se muestran resultados en trios dado por δ (-1,0,1)
         resultado=(f0(Z,A,MAS)+f1(Z,A,CTE)+f2(Z,A,CTE)+f3(Z,A,CTE)+f4(Z,A,CTE)+f5(Z,A,i,CTE))/MAS[3]
-        if SEL=='TEX':
+        if SEL=='TEX':                                  # Se muestran los datos solo como texto
             print(resultado)                            # resultado en dalton
-        elif SEL=='TER':  
-            print('M(',Z,',',A,')=',resultado)    # resultado en dalton
-        elif SEL=='VEC':
-            DATOS.append(resultado)
+        elif SEL=='TER':                                # Se muestran los datos de forma visual en terminal
+            print('M(',Z,',',A,')=',resultado)          # resultado en dalton
+        elif SEL=='VEC':                                # Se almacenan los datos en un vector
+            DATOS.append(resultado)                     # resultado en dalton
 
 #######################################################################################################
 
