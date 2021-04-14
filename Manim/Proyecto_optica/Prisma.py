@@ -53,7 +53,7 @@ class prisma(GraphScene):
         lt2=self.get_graph(Triangulo2,x_min=-10,x_max=0, color=LIGHT_GRAY)
         lt3=self.get_graph(Triangulo3,x_min=0,x_max=10, color=LIGHT_GRAY)
         x0=-3.45
-        xf=20*np.pi        
+        xf=20*np.pi
         lu0=self.get_graph(func0,x_min=-20,x_max=-3.5, color=WHITE)
         lu1=self.get_graph(func1,x_min=x0,x_max=xf, color=RED)
         lu2=self.get_graph(func2,x_min=x0,x_max=xf, color=ORANGE)
@@ -77,5 +77,49 @@ class prisma(GraphScene):
             ShowCreation(lu6),
             ShowCreation(lu7),
             run_time=6)
+        self.wait(5)
+        self.play(FadeOut(lt1),
+            FadeOut(lt2),
+            FadeOut(lt3),
+            FadeOut(lu1),
+            FadeOut(lu2),
+            FadeOut(lu3),
+            FadeOut(lu4),
+            FadeOut(lu5),
+            FadeOut(lu6),
+            FadeOut(lu7),
+            run_time=1)
+    def construct(self):
+        self.show_function_graph()
+
+class onda(GraphScene):
+    CONFIG={
+        "x_min": -20,
+        "x_max": 50,
+        "y_min": -2,
+        "y_max": 4,
+        "x_axis_label": "",
+        "y_axis_label": "",
+        "graph_origin": 0 * DOWN + 2 * LEFT,
+        "axes_color": BLACK
+    }    
+    #defining graph functions
+    def show_function_graph(self):
+        self.setup_axes(animate=False)    
+        def func0(x):
+            return 0.15**2*x+0.4
+        def func1(x):
+            return 2*np.sin(0.15*x)
+        def func2(x):
+            return 0
+        x0=-5.5
+        xf=21*np.pi        
+        lu0=self.get_graph(func0,x_min=-20,x_max=-4, color=WHITE)
+        senl=self.get_graph(func1,x_min=2*x0*np.pi,x_max=xf, color=WHITE)
+        linx=self.get_graph(func2,x_min=3*x0*np.pi,x_max=xf+5, color=WHITE)
+        self.play(Transform(lu0, senl),
+            run_time=5)
+        self.play(ShowCreation(linx),
+            run_time=3)
     def construct(self):
         self.show_function_graph()
