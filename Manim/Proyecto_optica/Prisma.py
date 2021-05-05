@@ -205,8 +205,11 @@ class TextoJames(Scene):
         title2.scale(1.5)
         self.play(
             Write(title1),      # de arriba hacia abajo el parámetro es DOWN
-            Write(title2),
             run_time=2                 # La duración de la animación es 3s
+        )
+        self.play(
+            Write(title2),
+            run_time=2
         )
 
         self.wait()
@@ -216,6 +219,17 @@ class TextoJames(Scene):
         )
         title3.scale(1.5)
         title3.to_edge(np.array([-3,0.5,0]))
+        self.play(
+            Transform(title1, title3)
+        )
+        
+        self.wait()
+        
+        self.play(
+            FadeOut(title2),
+            run_time=1
+        )
+
         title4 = TexMobject(
             "\\nabla \\cdot E=\\frac{\\rho}{\\epsilon_0}"
         )
@@ -237,13 +251,15 @@ class TextoJames(Scene):
         title6.to_edge(np.array([-3,-4.5,0]))
         title7.to_edge(np.array([-3,-2.0,0]))
         self.play(
-            Transform(title1, title3),
             Write(title4),
             Write(title5),
             Write(title6),
             Write(title7),
             run_time=2                 # La duración de la animación es 3s
         )
+
+        self.wait()
+
         title8 = TexMobject(
             "Leyes~de~Gauss"
         )
@@ -259,10 +275,6 @@ class TextoJames(Scene):
         title9.scale(1.25)
         title10.to_edge(np.array([7,-2.0,0]))
         title10.scale(1.25)
-        self.play(
-            FadeOut(title2),
-            run_time=1
-        )
         self.play(
             Write(title8),
             Write(title9),
@@ -294,3 +306,204 @@ class TextoJames(Scene):
             run_time=2                 # La duración de la animación es 3s
         )  
         self.wait()
+
+class EyB(Scene):
+    def construct(self):
+        #self.add(NumberPlane())
+        self.para_function1()      
+
+    def para_function1(self):
+        title1= TexMobject(
+            "\\vec{E}")           
+        title2= TexMobject(
+            "\\vec{B}")      
+        title3= TexMobject(
+            "E"
+        )     
+        title4= TexMobject(
+            "M"
+        )             
+        title1.to_edge(np.array([-6.75,7,0]))
+        title1.scale(4)               
+        title2.to_edge(np.array([6.75,7,0]))
+        title2.scale(4)     
+        title3.to_edge(np.array([-11.5,0,0]))
+        title3.scale(6)   
+        title4.to_edge(np.array([11.5,0,0]))
+        title4.scale(6)           
+        func1 = lambda t: np.array([-3.5,t,0])
+        graph1 = ParametricFunction(func1,t_min=1.25,t_max=4,color=WHITE)
+        func2 = lambda t: np.array([-3.5,t,0])
+        graph2 = ParametricFunction(func2,t_min=-1.0,t_max=-4,color=WHITE)
+        func3 = lambda t: np.array([3.5,t,0])
+        graph3 = ParametricFunction(func3,t_min=1.25,t_max=4,color=WHITE)
+        func4 = lambda t: np.array([3.5,t,0])
+        graph4 = ParametricFunction(func4,t_min=-1.0,t_max=-4,color=WHITE)
+        
+        func5 = lambda t: np.array([t,0,0])
+        graph5 = ParametricFunction(func5,t_min=-4.5,t_max=-7,color=WHITE)
+        graph6 = ParametricFunction(func5,t_min=-2.5,t_max=-0.20,color=WHITE)
+        func7= lambda t: np.array([t,0.26795*t+0.93783,0])
+        graph8 = ParametricFunction(func7,t_min=-2.5,t_max=-0.155,color=WHITE)
+        graph9 = ParametricFunction(func7,t_min=-4.5,t_max=-7,color=WHITE)
+        func8= lambda t: np.array([t,0.57733*t+2.02066,0])
+        graph10 = ParametricFunction(func8,t_min=-2.5,t_max=0,color=WHITE)
+        graph11 = ParametricFunction(func8,t_min=-4.5,t_max=-7,color=WHITE)
+        func9= lambda t: np.array([t,t+3.5,0])
+        graph12 = ParametricFunction(func9,t_min=-2.5,t_max=0,color=WHITE)
+        graph13 = ParametricFunction(func9,t_min=-4.5,t_max=-7,color=WHITE)
+        
+        func10= lambda t: np.array([t,-t-3.5,0])
+        graph14 = ParametricFunction(func10,t_min=-2.5,t_max=0,color=WHITE)
+        graph15 = ParametricFunction(func10,t_min=-4.5,t_max=-7,color=WHITE)        
+        func11= lambda t: np.array([t,-0.26795*t-0.93783,0])
+        graph16 = ParametricFunction(func11,t_min=-2.5,t_max=-0.155,color=WHITE)
+        graph17 = ParametricFunction(func11,t_min=-4.5,t_max=-7,color=WHITE)
+        func12= lambda t: np.array([t,-0.57733*t-2.02066,0])
+        graph18 = ParametricFunction(func12,t_min=-2.5,t_max=0,color=WHITE)
+        graph19 = ParametricFunction(func12,t_min=-4.5,t_max=-7,color=WHITE)       
+
+        # elipses
+        func20= lambda t: np.array([3+np.cos(t)/2.5,0+np.sin(t),0])
+        graph20 = ParametricFunction(func20,t_min=0.3*np.pi,t_max=1.7*np.pi,color=WHITE)
+
+        func21= lambda t: np.array([2.75+2*np.cos(t)/2.5,0+2*np.sin(t),0])
+        graph21 = ParametricFunction(func21,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+
+        func22= lambda t: np.array([2.5+3*np.cos(t)/2.5,0+3*np.sin(t),0])
+        graph22 = ParametricFunction(func22,t_min=0.18*np.pi,t_max=1.82*np.pi,color=WHITE)
+
+        func23= lambda t: np.array([2.1+3.5*np.cos(t)/2.25,0+3.5*np.sin(t),0])
+        graph23 = ParametricFunction(func23,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+
+        func24= lambda t: np.array([1.70+4.35*np.cos(t)/2.25,0+4*np.sin(t),0])
+        graph24 = ParametricFunction(func24,t_min=0.1*np.pi,t_max=1.9*np.pi,color=WHITE)
+
+        # elipses invertidas       
+        func25= lambda t: np.array([4-np.cos(t)/2.5,0-np.sin(t),0])
+        graph25 = ParametricFunction(func25,t_max=0.3*np.pi,t_min=1.7*np.pi,color=WHITE)
+
+        func26= lambda t: np.array([4.25-2*np.cos(t)/2.5,0+2*np.sin(t),0])
+        graph26 = ParametricFunction(func26,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+
+        func27= lambda t: np.array([4.5-3*np.cos(t)/2.5,0+3*np.sin(t),0])
+        graph27 = ParametricFunction(func27,t_min=0.18*np.pi,t_max=1.82*np.pi,color=WHITE) 
+
+        func28= lambda t: np.array([4.9-3.5*np.cos(t)/2.25,0+3.5*np.sin(t),0])
+        graph28 = ParametricFunction(func28,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+
+        func29= lambda t: np.array([5.20-4.2*np.cos(t)/2.25,0+4*np.sin(t),0])
+        graph29 = ParametricFunction(func29,t_min=0.1*np.pi,t_max=1.9*np.pi,color=WHITE)
+
+        # puntos
+        dot=Dot()
+        self.play(
+            Write(title1),
+            Write(title2),
+            ShowCreation(graph1),
+            ShowCreation(graph2),
+            ShowCreation(graph3),
+            ShowCreation(graph4),
+            ShowCreation(graph5),
+            ShowCreation(graph6),
+            ShowCreation(graph8),
+            ShowCreation(graph9), 
+            ShowCreation(graph10),
+            ShowCreation(graph11),
+            ShowCreation(graph12),
+            ShowCreation(graph13),
+            ShowCreation(graph14),
+            ShowCreation(graph15),
+            ShowCreation(graph16),
+            ShowCreation(graph17),
+            ShowCreation(graph18),
+            ShowCreation(graph19),
+            ShowCreation(graph20),
+            ShowCreation(graph21),
+            ShowCreation(graph22),
+            ShowCreation(graph23),
+            ShowCreation(graph24),
+            ShowCreation(graph25),
+            ShowCreation(graph26),
+            ShowCreation(graph27),
+            ShowCreation(graph28),
+            ShowCreation(graph29),
+            run_time=3
+        )
+        self.wait()
+        self.play(
+            FadeOut(graph1),
+            FadeOut(graph2),
+            FadeOut(graph3),
+            FadeOut(graph4),
+            FadeOut(graph5),
+            FadeOut(graph6),
+            FadeOut(graph8),
+            FadeOut(graph9),
+            FadeOut(graph10),
+            FadeOut(graph11),
+            FadeOut(graph12),
+            FadeOut(graph13),
+            FadeOut(graph14),
+            FadeOut(graph15),
+            FadeOut(graph16),
+            FadeOut(graph17),
+            FadeOut(graph18),
+            FadeOut(graph19),
+            FadeOut(graph20),
+            FadeOut(graph21),
+            FadeOut(graph22),
+            FadeOut(graph23),
+            FadeOut(graph24),
+            FadeOut(graph25),
+            FadeOut(graph26),
+            FadeOut(graph27),
+            FadeOut(graph28),
+            FadeOut(graph29),
+        run_time=2)
+        
+        self.play(
+            Write(title3),
+            Write(title4),
+            Transform(title1, title3),
+            Transform(title2, title4),
+            run_time=2
+        )
+        for i in range(-7,-2):
+            for j in range(-4,2):
+                dot = Dot((i,j,0))
+                dot1 = Dot((i,abs(j),0))
+                dot2 = Dot((abs(i),j,0))
+                dot3 = Dot((abs(i),abs(j),0))
+                self.play(
+                    ShowCreation(dot),
+                    ShowCreation(dot1),
+                    ShowCreation(dot2),
+                    ShowCreation(dot3),
+                    run_time=0.0001
+                )
+        for i in range(-2,1):
+            for j in range(-4,-1):
+                dot = Dot((i,j,0))
+                dot1 = Dot((i,abs(j),0))
+                dot2 = Dot((abs(i),j,0))
+                dot3 = Dot((abs(i),abs(j),0))
+                self.play(
+                    ShowCreation(dot),
+                    ShowCreation(dot1),
+                    ShowCreation(dot2),
+                    ShowCreation(dot3),                     
+                    run_time=0.0001
+                )
+                
+        dot4 = Dot((0,-2,0))
+        dot5 = Dot((0,2,0))                
+        self.play(
+            ShowCreation(dot4),
+            ShowCreation(dot5),                    
+            run_time=0.0001
+        )
+
+
+
+
