@@ -551,8 +551,8 @@ class Electro_correjido(Scene):
             x=i/2+1
             flecha1=Arrow([x,0,0], [x, 2*np.sin((x)/2), 0],color=RED)
             flecha2=Arrow([-x,0,0], [-x, -2*np.sin((x)/2), 0],color=BLUE)
-            flecha3=Arrow([-x-12,0,0], [-x-12, 2*np.sin((x)/2), 0],color=RED)
-            flecha4=Arrow([x+12,0,0], [x+12, -2*np.sin((x)/2), 0],color=BLUE)
+            flecha3=Arrow([-x-6,0,0], [-x-6, 2*np.sin((x)/2), 0],color=RED)
+            flecha4=Arrow([x+6,0,0], [x+6, -2*np.sin((x)/2), 0],color=BLUE)
             self.play(
                 ShowCreation(flecha1),
                 ShowCreation(flecha2),
@@ -565,3 +565,58 @@ class Electro_correjido(Scene):
             Uncreate(lineacentro),
             run_time=2
         )        
+
+ThreeDAxes(
+    x_min=-10,
+    x_max= 10,
+    y_min=-10,
+    y_max= 10,
+    z_min=-10,
+    z_max= 10,
+)
+class Onda3D(ThreeDScene):
+    def construct(self):
+        axes = ThreeDAxes()
+        circle=Circle(color=WHITE)
+        self.set_camera_orientation(
+            phi=0 * DEGREES,
+            theta=90*DEGREES) #-90
+        for i in range(0,10):
+            x=i/2+1
+            flecha1=Arrow([x,0,0], [x, 2*np.sin((x)/2), 0],color=BLUE)
+            flecha2=Arrow([-x,0,0], [-x, -2*np.sin((x)/2), 0],color=RED)
+            flecha3=Arrow([-x-6,0,0], [-x-6, 2*np.sin((x)/2), 0],color=BLUE)
+            flecha4=Arrow([x+6,0,0], [x+6, -2*np.sin((x)/2), 0],color=RED)
+            self.play(
+                #ShowCreation(axes),
+                ShowCreation(flecha1),
+                ShowCreation(flecha2),
+                ShowCreation(flecha3),
+                ShowCreation(flecha4),
+                run_time=0.01
+            )        
+        self.wait(2)
+        func1 = lambda t: np.array([t,0,0])
+        centro = ParametricFunction(func1,t_min=10,t_max=-10,color=DARK_GREY)
+        self.play(
+            ShowCreation(centro),
+            run_time=2
+        )        
+        self.move_camera(
+            phi=90*DEGREES,
+            theta=90*DEGREES,  #-90
+            run_time=3)
+        for i in range(0,10):
+            x=i/2+1
+            flecha1=Arrow([x,0,0], [x,0, 2*np.sin((x)/2)],color=GREEN_D)
+            flecha2=Arrow([-x,0,0], [-x,0, -2*np.sin((x)/2)],color=MAROON_D)
+            flecha3=Arrow([-x-6,0,0], [-x-6,0, 2*np.sin((x)/2)],color=GREEN_D)
+            flecha4=Arrow([x+6,0,0], [x+6,0, -2*np.sin((x)/2)],color=MAROON_D)
+            self.play(
+                ShowCreation(flecha1),
+                ShowCreation(flecha2),
+                ShowCreation(flecha3),
+                ShowCreation(flecha4),
+                run_time=0.1
+            )
+        self.move_camera(phi=65*DEGREES,theta=115*DEGREES,run_time=4)
