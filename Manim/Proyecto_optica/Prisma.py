@@ -332,68 +332,68 @@ class EyB(Scene):
         title4.to_edge(np.array([11.5,0,0]))
         title4.scale(6)           
         func1 = lambda t: np.array([-3.5,t,0])
-        graph1 = ParametricFunction(func1,t_min=1.25,t_max=4,color=WHITE)
+        graph1 = ParametricFunction(func1,t_min=1.25,t_max=4,color=RED_C)
         func2 = lambda t: np.array([-3.5,t,0])
-        graph2 = ParametricFunction(func2,t_min=-1.0,t_max=-4,color=WHITE)
+        graph2 = ParametricFunction(func2,t_min=-1.0,t_max=-4,color=RED_C)
         func3 = lambda t: np.array([3.5,t,0])
-        graph3 = ParametricFunction(func3,t_min=1.25,t_max=4,color=WHITE)
+        graph3 = ParametricFunction(func3,t_min=1.25,t_max=4,color=GREEN_D)
         func4 = lambda t: np.array([3.5,t,0])
-        graph4 = ParametricFunction(func4,t_min=-1.0,t_max=-4,color=WHITE)
+        graph4 = ParametricFunction(func4,t_min=-1.0,t_max=-4,color=GREEN_D)
         
         func5 = lambda t: np.array([t,0,0])
-        graph5 = ParametricFunction(func5,t_min=-4.5,t_max=-7,color=WHITE)
-        graph6 = ParametricFunction(func5,t_min=-2.5,t_max=-0.20,color=WHITE)
+        graph5 = ParametricFunction(func5,t_min=-4.5,t_max=-7,color=RED_C)
+        graph6 = ParametricFunction(func5,t_min=-2.5,t_max=-0.20,color=RED_C)
         func7= lambda t: np.array([t,0.26795*t+0.93783,0])
-        graph8 = ParametricFunction(func7,t_min=-2.5,t_max=-0.155,color=WHITE)
-        graph9 = ParametricFunction(func7,t_min=-4.5,t_max=-7,color=WHITE)
+        graph8 = ParametricFunction(func7,t_min=-2.5,t_max=-0.155,color=RED_C)
+        graph9 = ParametricFunction(func7,t_min=-4.5,t_max=-7,color=RED_C)
         func8= lambda t: np.array([t,0.57733*t+2.02066,0])
-        graph10 = ParametricFunction(func8,t_min=-2.5,t_max=0,color=WHITE)
-        graph11 = ParametricFunction(func8,t_min=-4.5,t_max=-7,color=WHITE)
+        graph10 = ParametricFunction(func8,t_min=-2.5,t_max=0,color=RED_C)
+        graph11 = ParametricFunction(func8,t_min=-4.5,t_max=-7,color=RED_C)
         func9= lambda t: np.array([t,t+3.5,0])
-        graph12 = ParametricFunction(func9,t_min=-2.5,t_max=0,color=WHITE)
-        graph13 = ParametricFunction(func9,t_min=-4.5,t_max=-7,color=WHITE)
+        graph12 = ParametricFunction(func9,t_min=-2.5,t_max=0,color=RED_C)
+        graph13 = ParametricFunction(func9,t_min=-4.5,t_max=-7,color=RED_C)
         
         func10= lambda t: np.array([t,-t-3.5,0])
-        graph14 = ParametricFunction(func10,t_min=-2.5,t_max=0,color=WHITE)
-        graph15 = ParametricFunction(func10,t_min=-4.5,t_max=-7,color=WHITE)        
+        graph14 = ParametricFunction(func10,t_min=-2.5,t_max=0,color=RED_C)
+        graph15 = ParametricFunction(func10,t_min=-4.5,t_max=-7,color=RED_C)
         func11= lambda t: np.array([t,-0.26795*t-0.93783,0])
-        graph16 = ParametricFunction(func11,t_min=-2.5,t_max=-0.155,color=WHITE)
-        graph17 = ParametricFunction(func11,t_min=-4.5,t_max=-7,color=WHITE)
+        graph16 = ParametricFunction(func11,t_min=-2.5,t_max=-0.155,color=RED_C)
+        graph17 = ParametricFunction(func11,t_min=-4.5,t_max=-7,color=RED_C)
         func12= lambda t: np.array([t,-0.57733*t-2.02066,0])
-        graph18 = ParametricFunction(func12,t_min=-2.5,t_max=0,color=WHITE)
-        graph19 = ParametricFunction(func12,t_min=-4.5,t_max=-7,color=WHITE)       
+        graph18 = ParametricFunction(func12,t_min=-2.5,t_max=0,color=RED_C)
+        graph19 = ParametricFunction(func12,t_min=-4.5,t_max=-7,color=RED_C)
 
         # elipses
         func20= lambda t: np.array([3+np.cos(t)/2.5,0+np.sin(t),0])
-        graph20 = ParametricFunction(func20,t_min=0.3*np.pi,t_max=1.7*np.pi,color=WHITE)
+        graph20 = ParametricFunction(func20,t_min=0.3*np.pi,t_max=1.7*np.pi,color=GREEN_D)
 
         func21= lambda t: np.array([2.75+2*np.cos(t)/2.5,0+2*np.sin(t),0])
-        graph21 = ParametricFunction(func21,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+        graph21 = ParametricFunction(func21,t_min=0.2*np.pi,t_max=1.8*np.pi,color=GREEN_D)
 
         func22= lambda t: np.array([2.5+3*np.cos(t)/2.5,0+3*np.sin(t),0])
-        graph22 = ParametricFunction(func22,t_min=0.18*np.pi,t_max=1.82*np.pi,color=WHITE)
+        graph22 = ParametricFunction(func22,t_min=0.18*np.pi,t_max=1.82*np.pi,color=GREEN_D)
 
         func23= lambda t: np.array([2.1+3.5*np.cos(t)/2.25,0+3.5*np.sin(t),0])
-        graph23 = ParametricFunction(func23,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+        graph23 = ParametricFunction(func23,t_min=0.2*np.pi,t_max=1.8*np.pi,color=GREEN_D)
 
         func24= lambda t: np.array([1.70+4.35*np.cos(t)/2.25,0+4*np.sin(t),0])
-        graph24 = ParametricFunction(func24,t_min=0.1*np.pi,t_max=1.9*np.pi,color=WHITE)
+        graph24 = ParametricFunction(func24,t_min=0.1*np.pi,t_max=1.9*np.pi,color=GREEN_D)
 
         # elipses invertidas       
         func25= lambda t: np.array([4-np.cos(t)/2.5,0-np.sin(t),0])
-        graph25 = ParametricFunction(func25,t_max=0.3*np.pi,t_min=1.7*np.pi,color=WHITE)
+        graph25 = ParametricFunction(func25,t_max=0.3*np.pi,t_min=1.7*np.pi,color=GREEN_D)
 
         func26= lambda t: np.array([4.25-2*np.cos(t)/2.5,0+2*np.sin(t),0])
-        graph26 = ParametricFunction(func26,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+        graph26 = ParametricFunction(func26,t_min=0.2*np.pi,t_max=1.8*np.pi,color=GREEN_D)
 
         func27= lambda t: np.array([4.5-3*np.cos(t)/2.5,0+3*np.sin(t),0])
-        graph27 = ParametricFunction(func27,t_min=0.18*np.pi,t_max=1.82*np.pi,color=WHITE) 
+        graph27 = ParametricFunction(func27,t_min=0.18*np.pi,t_max=1.82*np.pi,color=GREEN_D)
 
         func28= lambda t: np.array([4.9-3.5*np.cos(t)/2.25,0+3.5*np.sin(t),0])
-        graph28 = ParametricFunction(func28,t_min=0.2*np.pi,t_max=1.8*np.pi,color=WHITE)
+        graph28 = ParametricFunction(func28,t_min=0.2*np.pi,t_max=1.8*np.pi,color=GREEN_D)
 
         func29= lambda t: np.array([5.20-4.2*np.cos(t)/2.25,0+4*np.sin(t),0])
-        graph29 = ParametricFunction(func29,t_min=0.1*np.pi,t_max=1.9*np.pi,color=WHITE)
+        graph29 = ParametricFunction(func29,t_min=0.1*np.pi,t_max=1.9*np.pi,color=GREEN_D)
 
         # puntos
         dot=Dot()
@@ -471,10 +471,10 @@ class EyB(Scene):
         )
         for i in range(-7,-2):
             for j in range(-4,2):
-                dot = Dot((i,j,0))
-                dot1 = Dot((i,abs(j),0))
-                dot2 = Dot((abs(i),j,0))
-                dot3 = Dot((abs(i),abs(j),0))
+                dot = Dot((i,j,0),color=BLUE_D)
+                dot1 = Dot((i,abs(j),0),color=BLUE_D)
+                dot2 = Dot((abs(i),j,0),color=BLUE_D)
+                dot3 = Dot((abs(i),abs(j),0),color=BLUE_D)
                 self.play(
                     ShowCreation(dot),
                     ShowCreation(dot1),
@@ -484,10 +484,10 @@ class EyB(Scene):
                 )
         for i in range(-2,1):
             for j in range(-4,-1):
-                dot = Dot((i,j,0))
-                dot1 = Dot((i,abs(j),0))
-                dot2 = Dot((abs(i),j,0))
-                dot3 = Dot((abs(i),abs(j),0))
+                dot = Dot((i,j,0),color=BLUE_D)
+                dot1 = Dot((i,abs(j),0),color=BLUE_D)
+                dot2 = Dot((abs(i),j,0),color=BLUE_D)
+                dot3 = Dot((abs(i),abs(j),0),color=BLUE_D)
                 self.play(
                     ShowCreation(dot),
                     ShowCreation(dot1),
@@ -504,6 +504,64 @@ class EyB(Scene):
             run_time=0.0001
         )
 
-
-
-
+class Electro_correjido(Scene):
+    def get_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 2*np.sin((x+dx)/2),
+            x_min=-8,x_max=8,
+            color=WHITE
+        )
+    def centro(self,dx=0):
+        return FunctionGraph(
+            lambda x: 0,
+            x_min=-8,x_max=8,
+            color=WHITE
+        )
+    def construct(self):
+        sine_function=self.get_sine_wave()
+        lineacentro=self.centro()
+        d_theta=ValueTracker(0)
+        def update_wave(func):
+            func.become(
+                self.get_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update_centro(func):
+            func.become(
+                self.centro(dx=d_theta.get_value())
+            )
+            return func
+        sine_function.add_updater(update_wave)
+        lineacentro.add_updater(update_centro)
+        self.play(ShowCreation(sine_function),
+            run_time=3
+        )
+        self.wait()
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            ShowCreation(lineacentro),
+            run_time=1
+        )
+        #for x in range(0,6):
+        for i in range(0,10):
+            x=i/2+1
+            flecha1=Arrow([x,0,0], [x, 2*np.sin((x)/2), 0],color=RED)
+            flecha2=Arrow([-x,0,0], [-x, -2*np.sin((x)/2), 0],color=BLUE)
+            flecha3=Arrow([-x-12,0,0], [-x-12, 2*np.sin((x)/2), 0],color=RED)
+            flecha4=Arrow([x+12,0,0], [x+12, -2*np.sin((x)/2), 0],color=BLUE)
+            self.play(
+                ShowCreation(flecha1),
+                ShowCreation(flecha2),
+                ShowCreation(flecha3),
+                ShowCreation(flecha4),
+                run_time=0.35
+            )
+        self.play(
+            Uncreate(sine_function),
+            Uncreate(lineacentro),
+            run_time=2
+        )        
