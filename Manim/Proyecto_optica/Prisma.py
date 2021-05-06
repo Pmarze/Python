@@ -1,10 +1,10 @@
 # Comando para ejecutar el programa y exportar video de muestra 
 # en baja resolución, este además, muestra la lista de objetos
 # a exportar, se elije ingresando el número correspondiente.
-# python -m manim Funciones.py -pl
+# python -m manim Prisma.py -pl
 # Comando para ejecutar el programa y exportar todos los objetos
 # en alta calidad.
-# python -m manim funciones.py -p
+# python -m manim Prisma.py -p
 
 from big_ol_pile_of_manim_imports import *
 import numpy as np
@@ -577,7 +577,6 @@ ThreeDAxes(
 class Onda3D(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes()
-        circle=Circle(color=WHITE)
         self.set_camera_orientation(
             phi=0 * DEGREES,
             theta=90*DEGREES) #-90
@@ -620,3 +619,70 @@ class Onda3D(ThreeDScene):
                 run_time=0.1
             )
         self.move_camera(phi=65*DEGREES,theta=115*DEGREES,run_time=4)
+
+class Particula(ThreeDScene):
+    def get_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 2*np.sin((x+dx)/2),
+            x_min=-1.5*PI/2,x_max=8,
+            color=WHITE
+        )    
+    def construct(self):
+        title = TextMobject(
+        "Campo Electrico")     
+        title.to_edge(np.array([5.5,2,0]))
+        title.scale(1.5)  
+        sine_function=self.get_sine_wave()
+        d_theta=ValueTracker(0)
+        def update_wave(func):
+            func.become(
+                self.get_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        sine_function.add_updater(update_wave)
+        axes = ThreeDAxes()
+#        circle=Circle(radius=2,arc_center=np.array([3,0,0]),color=WHITE)
+        sphere = ParametricSurface(
+            lambda u, v: np.array([
+                0.5*np.cos(u)*np.cos(v)-3*PI/2,
+                0.5*np.cos(u)*np.sin(v)-2,
+                0.5*np.sin(u)
+            ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
+            resolution=(15, 32)).scale(1)        
+        sphere_up = ParametricSurface(
+            lambda u, v: np.array([
+                0.5*np.cos(u)*np.cos(v)-3*PI/2,
+                0.5*np.cos(u)*np.sin(v)+2,
+                0.5*np.sin(u)
+            ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
+            resolution=(15, 32)).scale(1)
+        sphere_down = ParametricSurface(
+            lambda u, v: np.array([
+                0.5*np.cos(u)*np.cos(v)-3*PI/2,
+                0.5*np.cos(u)*np.sin(v)-2,
+                0.5*np.sin(u)
+            ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
+            resolution=(15, 32)).scale(1)
+        self.set_camera_orientation(phi=0 * DEGREES,theta=-90*DEGREES) #-90        
+        #self.set_camera_orientation(phi=65 * DEGREES,theta=115*DEGREES)
+        self.play(
+        #ShowCreation(axes),
+        Write(title),
+        ShowCreation(sine_function),
+        ShowCreation(sphere),
+        run_time=3
+        )
+        tpart=2
+        for i in range(0,6):
+            self.play(
+                d_theta.increment_value,2*PI,
+                Transform(sphere,sphere_up),
+                rate_func=linear,
+                run_time=tpart
+            )        
+            self.play(
+                d_theta.increment_value,2*PI,
+                Transform(sphere,sphere_down),
+                rate_func=linear,
+                run_time=tpart
+            )
