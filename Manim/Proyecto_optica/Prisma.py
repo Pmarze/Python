@@ -574,6 +574,7 @@ ThreeDAxes(
     z_min=-10,
     z_max= 10,
 )
+
 class Onda3D(ThreeDScene):
     def construct(self):
         axes = ThreeDAxes()
@@ -626,13 +627,20 @@ class Particula(ThreeDScene):
             lambda x: 2*np.sin((x+dx)/2),
             x_min=-1.5*PI/2,x_max=8,
             color=WHITE
-        )    
+        )
+    def get_sine2(self,dx=0):
+        return FunctionGraph(
+            lambda x: 2*np.sin((x+dx)/2),
+            x_min=-8,x_max=8,
+            color=WHITE
+        )            
     def construct(self):
         title = TextMobject(
         "Campo Electrico")     
         title.to_edge(np.array([5.5,2,0]))
         title.scale(1.5)  
         sine_function=self.get_sine_wave()
+        sine2=self.get_sine2()
         d_theta=ValueTracker(0)
         def update_wave(func):
             func.become(
@@ -644,23 +652,23 @@ class Particula(ThreeDScene):
 #        circle=Circle(radius=2,arc_center=np.array([3,0,0]),color=WHITE)
         sphere = ParametricSurface(
             lambda u, v: np.array([
-                0.5*np.cos(u)*np.cos(v)-3*PI/2,
-                0.5*np.cos(u)*np.sin(v)-2,
-                0.5*np.sin(u)
+                0.5*np.cos(u)*np.sin(v)-3*PI/2,
+                0.5*np.sin(u)-2,                
+                0.5*np.cos(u)*np.cos(v),
             ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
             resolution=(15, 32)).scale(1)        
         sphere_up = ParametricSurface(
             lambda u, v: np.array([
-                0.5*np.cos(u)*np.cos(v)-3*PI/2,
-                0.5*np.cos(u)*np.sin(v)+2,
-                0.5*np.sin(u)
+                0.5*np.cos(u)*np.sin(v)-3*PI/2,
+                0.5*np.sin(u)+2,                
+                0.5*np.cos(u)*np.cos(v),
             ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
             resolution=(15, 32)).scale(1)
         sphere_down = ParametricSurface(
             lambda u, v: np.array([
-                0.5*np.cos(u)*np.cos(v)-3*PI/2,
-                0.5*np.cos(u)*np.sin(v)-2,
-                0.5*np.sin(u)
+                0.5*np.cos(u)*np.sin(v)-3*PI/2,
+                0.5*np.sin(u)-2,                
+                0.5*np.cos(u)*np.cos(v),
             ]),v_min=0,v_max=TAU,u_min=-PI/2,u_max=PI/2,checkerboard_colors=[BLUE_E, BLUE_D],
             resolution=(15, 32)).scale(1)
         self.set_camera_orientation(phi=0 * DEGREES,theta=-90*DEGREES) #-90        
@@ -686,3 +694,129 @@ class Particula(ThreeDScene):
                 rate_func=linear,
                 run_time=tpart
             )
+        self.play(
+            Uncreate(sphere),
+            Uncreate(title),
+            Transform(sine_function,sine2),
+            run_time=3
+        )                        
+
+class Ondas_3D(ThreeDScene):
+    def construct(self):
+        func0 = lambda t: np.array([2*np.sin(t/2),t,0])
+        graph0 = ParametricFunction(func0,t_min=-20,t_max=10,color=WHITE)
+        axes = ThreeDAxes()
+        self.set_camera_orientation(phi=0 * DEGREES,theta=0*DEGREES) #-90
+        
+        self.play(
+            ShowCreation(graph0),
+            run_time=0.5
+        )
+        for i in range(0,10):
+            y=i/2+1
+            flecha1=Arrow([0,y,0], [ 2*np.sin((y)/2),y,0],color=RED)
+            flecha2=Arrow([0,-y,0], [-2*np.sin((y)/2),-y,0],color=RED)
+            flecha3=Arrow([0,-y-6,0], [2*np.sin((y)/2),-y-6,0],color=RED)
+            flecha4=Arrow([0,y+6,0], [-2*np.sin((y)/2),y+6,0],color=RED)
+            self.play(
+                #ShowCreation(axes),
+                ShowCreation(flecha1),
+                ShowCreation(flecha2),
+                ShowCreation(flecha3),
+                ShowCreation(flecha4),
+                run_time=0.01
+            )
+        #self.wait(2)        
+        func1 = lambda t: np.array([0,t,0])
+        centro = ParametricFunction(func1,t_min=-20,t_max=10,color=DARK_GREY)
+        self.play(
+            ShowCreation(centro),
+            run_time=2
+        )
+        self.move_camera(phi=65*DEGREES,theta=135*DEGREES,run_time=4)
+        func2 = lambda t: np.array([0,t,2*np.sin(t/2-PI)])
+        graph2 = ParametricFunction(func2,t_min=-20,t_max=10,color=WHITE)        
+        self.play(
+            ShowCreation(graph2),
+            run_time=2
+        )                
+
+        for i in range(0,10):
+            x=i/2+1
+            flecha1=Arrow([0,x,0], [0,x, 2*np.sin((x)/2-PI)],color=GREEN_D)
+            flecha2=Arrow([0,-x,0], [0,-x, -2*np.sin((x)/2-PI)],color=GREEN_D)
+            flecha3=Arrow([0,-x-6,0], [0,-x-6, 2*np.sin((x)/2-PI)],color=GREEN_D)
+            flecha4=Arrow([0,x+6,0], [0,x+6, -2*np.sin((x)/2-PI)],color=GREEN_D)
+            self.play(
+                ShowCreation(flecha1),
+                ShowCreation(flecha2),
+                ShowCreation(flecha3),
+                ShowCreation(flecha4),
+                run_time=0.1
+            )
+        title1=TextMobject("Campo Electrico").scale(2).set_shade_in_3d(True).to_edge(np.array([0.5,0,0]))
+        title1.rotate(PI/2,axis=np.array([0.0,0.0,-1.0]))        
+        title2=TextMobject("Campo magnetico").scale(2).set_shade_in_3d(True).to_edge(np.array([0,-1.5,4]))
+        title2.rotate(PI/2,axis=RIGHT)
+        title2.rotate(PI/2,axis=np.array([0.0,0.0,-1.0]))
+        self.play(
+            Write(title1),
+            Write(title2),
+            run_time=2
+        )
+        self.wait(2)        
+        self.play(
+            FadeOut(title1),
+            FadeOut(title2),
+            run_time=2
+        )
+        title3=TextMobject("c=299,792,458~m/s").to_edge(np.array([0.5,0,0]))
+        self.play(
+            Write(title3),
+            run_time=3
+        )
+        #self.move_camera(phi=45*DEGREES,theta=130*DEGREES,run_time=4)            
+
+class EM(ThreeDScene):
+    CONFIG= {
+        "rate":0,
+        "rate2":TAU/150 , #animation rate
+    }
+ 
+    def construct(self): 
+        axes = ThreeDAxes() 
+        #self.add(axes)     
+        self.move_camera(phi=65*DEGREES,theta=135*DEGREES)
+        def para(t):
+            return np.array((t, 2*np.sin(t),0))
+        def para2(t):
+            return np.array((t, 0,2*np.sin(t)))
+        E_wave = ParametricFunction(para,t_min = -TAU, t_max = TAU, color = WHITE) 
+        B_wave = ParametricFunction(para2,t_min = -TAU, t_max = TAU, color = WHITE)
+        self.play(
+            ShowCreation(E_wave),
+            ShowCreation(B_wave),
+            run_time=3
+        )
+        n = 70     #number of ticks
+        n_frames = 50 #Used 500 for the animation I posted 
+        pos = -2*PI   #first tick
+        r = 0.2    #rate of ticks
+        #Tried with arrows, but it bugs, used lines instead
+        arrows = VGroup(  *[Line([pos + r*i,0,0], [pos + r*i , 2*np.sin(pos + r*i) , 0], color = RED)    for i in range(n+ 1 ) ] ) 
+        arrows2 = VGroup(  *[Line([pos + r*i,0,0], [pos + r*i ,   0 ,  2*np.sin(pos + r*i)], color = BLUE)    for i in range(n+ 1 ) ] ) 
+        #self.begin_ambient_camera_rotation(rate=0.5)
+        
+        for v in range(n_frames):
+            self.rate += self.rate2
+            #self.set_camera_orientation(phi=80 * DEGREES, theta = -PI/2 + self.rate/35)
+            def para3(t):
+                return np.array((t, 2*np.sin(t - self.rate),0))
+            def para4(t):
+                return np.array((t, 0, 2*np.sin(t - self.rate)))
+            E_wave_new = ParametricFunction(para3,t_min = -TAU, t_max = TAU , color = WHITE)
+            B_wave_new = ParametricFunction(para4,t_min = -TAU, t_max = TAU, color = WHITE) 
+            new_arrow = VGroup(  *[Line([pos + r*i , 0,0 ], [pos + r*i   ,   2*np.sin(pos + r*i - self.rate  ),0] , color = RED) for i in range(n+ 1) ] ) 
+            new_arrow2 = VGroup(  *[Line([pos + r*i , 0,0 ], [pos + r*i   ,  0, 2*np.sin(pos + r*i - self.rate  )] , color = BLUE) for i in range(n+ 1) ] ) 
+            self.play(   Transform(arrows, new_arrow) , Transform(B_wave, B_wave_new) ,Transform(arrows2, new_arrow2) , Transform(E_wave, E_wave_new) ,run_time = 0.01       )
+
