@@ -172,3 +172,34 @@ class Caminos(Scene):
             FadeOut(graph3_3),
             run_time=3
         )
+
+class Reflexion(Scene):
+    def construct(self):
+        title1=TextMobject("Ley de Reflexion").scale(2).to_edge(np.array([0,2.5,0]))
+        title2=TextMobject("$\\theta_1=\\theta_2$").scale(2).to_edge(np.array([0,0,0]))      
+        title3=TextMobject("$15^\\circ=15^\\circ$").scale(2).to_edge(np.array([0,0,0]))
+        title4=TextMobject("$18^\\circ=18^\\circ$").scale(2).to_edge(np.array([0,0,0]))
+        title5=TextMobject("$58^\\circ=58^\\circ$").scale(2).to_edge(np.array([0,0,0]))
+        title6=TextMobject("$50^\\circ=50^\\circ$").scale(2).to_edge(np.array([0,0,0]))
+        tiempo=1.5
+        self.play(
+            Write(title1),
+            Write(title2),
+            run_time=3
+        )
+        self.play(
+            Transform(title2,title3),
+            run_time=tiempo
+        )
+        self.play(
+            Transform(title2,title4),
+            run_time=tiempo
+        )        
+        self.play(
+            Transform(title2,title5),
+            run_time=tiempo
+        )
+        self.play(
+            Transform(title2,title6),
+            run_time=tiempo
+        )                    
