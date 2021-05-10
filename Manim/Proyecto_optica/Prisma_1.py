@@ -192,7 +192,7 @@ class Reflexion(Scene):
             run_time=tiempo
         )
         self.play(
-            Transform(title2,title4),
+            Transform(title2,title),
             run_time=tiempo
         )        
         self.play(
@@ -203,3 +203,120 @@ class Reflexion(Scene):
             Transform(title2,title6),
             run_time=tiempo
         )                    
+
+class N1N2(Scene):
+    def construct(self):                
+        func00 = lambda t: np.array([t,0,0])
+        func01 = lambda t: np.array([0,t,0])
+        graph00 = ParametricFunction(func00,t_min=-7,t_max=7,color=DARK_GREY)
+        graph01 = ParametricFunction(func01,t_min=-4,t_max=4,color=DARK_GREY)
+        func1 = lambda t: np.array([t,(-3/4)*t,0])
+        graph1 = ParametricFunction(func1,t_min=-7,t_max=0,color=WHITE)
+        func2 = lambda t: np.array([t,(-3/2)*t,0])
+        graph2 = ParametricFunction(func2,t_min=0,t_max=7,color=WHITE)
+        
+        title1=TextMobject("$\\theta_1$").to_edge(np.array([-13,6,0]))
+        title2=TextMobject("$\\theta_2$").to_edge(np.array([-15,11,0]))
+        title3=TextMobject("$N_1$").scale(2).to_edge(np.array([-4,4,0]))
+        title4=TextMobject("$N_2$").scale(2).to_edge(np.array([-4,-4,0]))
+        title5=TextMobject("$\\theta_1$").scale(2).to_edge(np.array([8,3,0]))
+        title6=TextMobject("$\\theta_2$").scale(2).to_edge(np.array([4,3,0]))
+        title7=TextMobject("$\\neq$").scale(2).to_edge(np.array([6,3,0]))
+        title8=TextMobject("$sin\\theta_1$").scale(1.5).to_edge(np.array([9,3,0]))
+        title9=TextMobject("$\\longleftrightarrow$").scale(1.5).to_edge(np.array([6,3,0]))
+        title10=TextMobject("$sin\\theta_2$").scale(1.5).to_edge(np.array([2,3,0]))                
+        title11=TextMobject("$sin\\theta_1$",color=RED_E).scale(1.5).to_edge(np.array([9,3,0]))
+        title12=TextMobject("$sin\\theta_2$",color=BLUE_E).scale(1.5).to_edge(np.array([2,3,0]))
+        func3 = lambda t: np.array([0,t,0])
+        graph3 = ParametricFunction(func3,t_min=0,t_max=4,color=RED_E)        
+        func4 = lambda t: np.array([0,t,0])
+        graph4 = ParametricFunction(func4,t_min=0,t_max=-4,color=BLUE_E)                
+        tiempo=2
+        self.play(
+            ShowCreation(graph00),
+            ShowCreation(graph01),
+            rate_func=linear,
+            run_time=tiempo
+        )        
+        self.play(
+            ShowCreation(graph1),
+            rate_func=linear,
+            run_time=tiempo
+        )
+        self.play(
+            ShowCreation(graph2),
+            rate_func=linear,
+            run_time=tiempo*0.5
+        )        
+        self.play(
+            Write(title1),
+            Write(title2),
+            Write(title3),
+            Write(title4),
+            run_time=2
+        )
+        self.play(
+            Transform(title1,title5),
+            Transform(title2,title6),
+            run_time=2
+        )
+        self.play(
+            Write(title7),
+            run_time=2
+        )
+        self.play(
+            Transform(title1,title8),
+            Transform(title2,title10),
+            Transform(title7,title9),            
+            run_time=2
+        )
+        self.wait(2)
+        self.play(
+            Transform(title1,title11),
+            Transform(title2,title12),
+            ShowCreation(graph3),
+            ShowCreation(graph4),
+            run_time=3
+        ) 
+        self.play(
+            #FadeOut(title1),
+            #FadeOut(title2),
+            FadeOut(title3),
+            FadeOut(title4),
+            #FadeOut(title7),
+            FadeOut(graph00),
+            FadeOut(graph01),
+            FadeOut(graph1),
+            FadeOut(graph2),
+            FadeOut(graph3),
+            FadeOut(graph4),
+            run_time=2
+        )      
+        title13=TextMobject("$n_1sin\\theta_1$").scale(1.5).to_edge(np.array([-8,0,0]))
+        title14=TextMobject("$=$").scale(1.5).to_edge(np.array([0,0,0]))
+        title15=TextMobject("$n_2sin\\theta_2$").scale(1.5).to_edge(np.array([8,0,0]))         
+        self.play(
+            Transform(title1,title13),
+            Transform(title2,title15),
+            Transform(title7,title14),
+            run_time=2
+        )
+        title16=TextMobject("$n_i=\\frac{c}{v_i}$").scale(2.5).to_edge(np.array([-5,0,0]))        
+        title17=TextMobject("Vel. de la luz \\\\ en el vacio \\\\ Vel. de la luz \\\\ en el medio").scale(1.5).to_edge(np.array([5,0,0]))        
+        self.wait(2)
+        self.play(
+            Transform(title1,title16),
+            Transform(title2,title17),
+            FadeOut(title7),
+            run_time=2
+        )
+        self.wait(2)
+        title18=TextMobject("Angulo de \\\\ redireccion").scale(2).to_edge(np.array([-3,2,0]))
+        title19=TextMobject("$\\theta_2=\\frac{n_1sen\\theta_1}{n_2}$").scale(2).to_edge(np.array([0,0,0]))
+        self.play(
+            Write(title18),
+            Transform(title1,title19),
+            FadeOut(title2),
+            run_time=2
+        )        
+        self.wait(2)
