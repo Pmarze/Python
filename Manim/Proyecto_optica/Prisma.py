@@ -782,41 +782,148 @@ class EM(ThreeDScene):
         "rate":0,
         "rate2":TAU/150 , #animation rate
     }
- 
     def construct(self): 
-        axes = ThreeDAxes() 
-        #self.add(axes)     
-        self.move_camera(phi=65*DEGREES,theta=135*DEGREES)
-        def para(t):
-            return np.array((t, 2*np.sin(t),0))
-        def para2(t):
-            return np.array((t, 0,2*np.sin(t)))
-        E_wave = ParametricFunction(para,t_min = -TAU, t_max = TAU, color = WHITE) 
-        B_wave = ParametricFunction(para2,t_min = -TAU, t_max = TAU, color = WHITE)
+        n = 30     #number of ticks
+        #n_frames = 5
+        n_frames = 500 #Used 500 for the animation I posted 
+        pos = -2*PI   #first tick
+        r = 0.8    #rate of ticks     
+        self.move_camera(phi=65*DEGREES,theta=45*DEGREES)        
+        func1 = lambda t: np.array([t,2*np.sin(t/2),0])
+        graph1 = ParametricFunction(func1,t_min = -20, t_max = 15, color = WHITE) 
+        func2 = lambda t: np.array([t,0,2*np.sin(t/2)])
+        graph2 = ParametricFunction(func2,t_min = -20, t_max = 15, color = WHITE)
+        func3= lambda t: np.array([t,0,0])
+        graph3= ParametricFunction(func3,t_min = -20, t_max = 15, color = DARK_GREY)
+        arrows = VGroup(*[Arrow([pos+r*i,0,0],[pos+r*i,2*np.sin((pos + r*i)/2),0],color= RED) for i in range(-15,n+1)]) 
+        arrows2 = VGroup(*[Arrow([pos+r*i,0,0],[pos+r*i,0,2*np.sin((pos+r*i)/2)],color= BLUE) for i in range(-15,n+1)])                 
+        
+        title1=TextMobject("Campo Electrico").scale(2).set_shade_in_3d(True).to_edge(np.array([0,0,-6]))
+        title1.rotate(PI,axis=np.array([0.0,1.0,0.0]))
+        title1.rotate(-3*PI/2,axis=np.array([1.0,0.0,0.0]))
+        
+        title2=TextMobject("Campo magnetico").scale(2).set_shade_in_3d(True).to_edge(np.array([0,-9,4]))
+        title2.rotate(PI,axis=np.array([0.0,1.0,0.0]))
+        title2.rotate(PI,axis=np.array([1.0,0.0,0.0]))
+
+        title3=TextMobject("c=299,792,458 m/s").scale(1.5).set_shade_in_3d(True).to_edge(np.array([-0.25,0,8]))
+        title3.rotate(PI,axis=np.array([0.0,1.0,0.0]))
+        title3.rotate(-3*PI/2,axis=np.array([1.0,0.0,0.0]))        
+        title3.rotate(-PI/4,axis=np.array([0.0,0.0,1.0]))
+
+        title4=TextMobject("$c \\leq 299,792,458$ m/s").scale(1.5).set_shade_in_3d(True).to_edge(np.array([-0.25,0,8]))
+        title4.rotate(PI,axis=np.array([0.0,1.0,0.0]))
+        title4.rotate(-3*PI/2,axis=np.array([1.0,0.0,0.0]))        
+        title4.rotate(-PI/4,axis=np.array([0.0,0.0,1.0]))
+
         self.play(
-            ShowCreation(E_wave),
-            ShowCreation(B_wave),
+            ShowCreation(graph1),
+            ShowCreation(graph3),
+            rate_func=linear,
             run_time=3
         )
-        n = 70     #number of ticks
-        n_frames = 50 #Used 500 for the animation I posted 
-        pos = -2*PI   #first tick
-        r = 0.2    #rate of ticks
-        #Tried with arrows, but it bugs, used lines instead
-        arrows = VGroup(  *[Line([pos + r*i,0,0], [pos + r*i , 2*np.sin(pos + r*i) , 0], color = RED)    for i in range(n+ 1 ) ] ) 
-        arrows2 = VGroup(  *[Line([pos + r*i,0,0], [pos + r*i ,   0 ,  2*np.sin(pos + r*i)], color = BLUE)    for i in range(n+ 1 ) ] ) 
-        #self.begin_ambient_camera_rotation(rate=0.5)
-        
+        self.play(
+            ShowCreation(arrows),
+            Write(title2),
+            rate_func=linear,
+            run_time=3
+        )
+        self.play(
+            ShowCreation(graph2),
+            rate_func=linear,
+            run_time=3
+        )        
+        self.play(
+            ShowCreation(arrows2),
+            Write(title1),
+            rate_func=linear,
+            run_time=3
+        )                
         for v in range(n_frames):
             self.rate += self.rate2
-            #self.set_camera_orientation(phi=80 * DEGREES, theta = -PI/2 + self.rate/35)
-            def para3(t):
-                return np.array((t, 2*np.sin(t - self.rate),0))
-            def para4(t):
-                return np.array((t, 0, 2*np.sin(t - self.rate)))
-            E_wave_new = ParametricFunction(para3,t_min = -TAU, t_max = TAU , color = WHITE)
-            B_wave_new = ParametricFunction(para4,t_min = -TAU, t_max = TAU, color = WHITE) 
-            new_arrow = VGroup(  *[Line([pos + r*i , 0,0 ], [pos + r*i   ,   2*np.sin(pos + r*i - self.rate  ),0] , color = RED) for i in range(n+ 1) ] ) 
-            new_arrow2 = VGroup(  *[Line([pos + r*i , 0,0 ], [pos + r*i   ,  0, 2*np.sin(pos + r*i - self.rate  )] , color = BLUE) for i in range(n+ 1) ] ) 
-            self.play(   Transform(arrows, new_arrow) , Transform(B_wave, B_wave_new) ,Transform(arrows2, new_arrow2) , Transform(E_wave, E_wave_new) ,run_time = 0.01       )
+            func1_1 = lambda t: np.array((t, 2*np.sin((t - self.rate)/2),0))
+            func2_1 = lambda t: np.array((t, 0, 2*np.sin((t - self.rate)/2)))
+            graph1_1 = ParametricFunction(func1_1,t_min = -20, t_max = 15, color = WHITE)
+            graph2_1 = ParametricFunction(func2_1,t_min = -20, t_max = 15, color = WHITE)
+            new_arrow = VGroup(*[Arrow([pos+r*i,0,0], [pos+r*i, 2*np.sin((pos+r*i-self.rate)/2),0], color = RED) for i in range(-15,n+1)]) 
+            new_arrow2 = VGroup(*[Arrow([pos+r*i,0,0], [pos+r*i,0, 2*np.sin((pos+r*i-self.rate)/2)], color = BLUE) for i in range(-15,n+1)])             
+            self.play(   Transform(arrows, new_arrow) , Transform(graph1, graph1_1) ,Transform(arrows2, new_arrow2) , Transform(graph2, graph2_1) ,run_time = 0.05)                
+        self.play(
+            FadeOut(title1),
+            FadeOut(title2),
+            run_time=2
+        )
+        self.play(
+            Write(title3),
+            run_time=2
+        )
+        self.play(
+            Transform(title3,title4),
+            run_time=1                    
+        )
 
+class Rojos(Scene):
+    def sine1(self,dx=0):
+        return FunctionGraph(
+            lambda x: np.sin((x+dx)),
+            x_min=-8,x_max=0,
+            color=RED_E
+        )
+    def sine2(self,dx=0):
+        return FunctionGraph(
+            lambda x: np.sin((x+dx)/2),
+            x_min=0,x_max=8,
+            color=PURPLE_A
+        )      
+    def sinep(self,dx=0):
+        return FunctionGraph(
+            lambda x: np.sin((x+dx)) if (x>=-8 and x<=-5.715)  else (
+                np.sin(2*(x+dx)) if (x>-5.715 and x<=-3.43) else (
+                np.sin(3*(x+dx)) if (x>-3.43 and x<=-1.145) else (
+                np.sin(4*(x+dx)) if (x>-1.145 and x<=1.14) else (
+                np.sin(5*(x+dx)) if (x>1.14 and x<=3.425) else (
+                np.sin(6*(x+dx)) if (x>3.425 and x<=5.71) else ( 
+                np.sin(7*(x+dx)) if (x>5.71 and x<=8) else 0)))))),
+            x_min=-8,x_max=8,
+            color=DARK_GREY
+        )                             
+    def construct(self):
+        title1=TextMobject("Infrarrojo",color=RED_E).scale(2).to_edge(np.array([-3,1.5,0]))
+        title2=TextMobject("Ultravioleta",color=PURPLE_A).scale(2).to_edge(np.array([1.5,1.5,0]))
+        func1 = lambda t: np.array([0,t,0])
+        graph1 = ParametricFunction(func1,t_min=-4,t_max=4,color=DARK_GREY)
+        inf1=self.sine1()
+        ult1=self.sine2()
+        prueba=self.sinep()
+        d_theta=ValueTracker(0)
+        def update_sine1(func):
+            func.become(
+                self.sine1(dx=d_theta.get_value())
+            )
+            return func
+        def update_sine2(func):
+            func.become(
+                self.sine2(dx=d_theta.get_value())
+            )
+            return func
+            return func
+        inf1.add_updater(update_sine1)
+        ult1.add_updater(update_sine2)
+
+        self.play(
+            Write(title1),
+            Write(title2),
+            ShowCreation(graph1),
+            ShowCreation(inf1),
+            ShowCreation(ult1),
+            run_time=3
+        )
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=10
+        )      
+        self.play(
+            Transform(inf1,prueba),
+            run_time=3
+        )
