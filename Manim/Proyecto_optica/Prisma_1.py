@@ -320,3 +320,51 @@ class N1N2(Scene):
             run_time=2
         )        
         self.wait(2)
+
+class Snel(Scene):
+    def construct(self):
+        title1=TextMobject("Ley de refraccion/Snell").scale(2).to_edge(np.array([0,2.5,0]))   
+        title2=TextMobject("$n_1sin\\theta_1=n_2sin\\theta_2$").scale(2).to_edge(np.array([0,0,0]))
+        self.play(
+            Write(title1),
+            Write(title2),
+            run_time=2
+        )
+        self.wait(2)
+        self.play(
+            FadeOut(title1),
+            FadeOut(title2),
+            run_time=2
+        )        
+
+class Mano(ThreeDScene):
+    def construct(self):
+        E=Arrow([0,0,0], [ -3,0,0],color=BLUE_C)    # centro
+        B=Arrow([0,0,0], [ 0,0,3],color=RED_C)      # arriba
+        P=Arrow([0,0,0], [ 0,3,0],color=GREEN)        # derecha
+        axes = ThreeDAxes()
+        #self.set_camera_orientation(phi=-45 * DEGREES,theta=45*DEGREES) #-90
+        self.set_camera_orientation(phi=65 * DEGREES,theta=135*DEGREES) #-90
+        self.play(
+            #ShowCreation(axes),
+            ShowCreation(E),
+            ShowCreation(B),
+            rate_func=linear,
+            run_time=4
+        )
+        self.move_camera(phi=-65*DEGREES,theta=45*DEGREES,rate_func=linear,run_time=2)
+        E1=Arrow([0,0,0], [ 0,0,-3],color=BLUE_C)    # centro
+        B1=Arrow([0,0,0], [ 4,0,0],color=RED_C)      # arriba
+        P1=Arrow([0,0,0], [ 0,4,0],color=GREEN)        # derecha        
+        self.play(
+            Transform(E,E1),
+            Transform(B,B1),
+            rate_func=linear,
+            run_time=2
+        )
+        self.wait(2)
+        self.play(
+            ShowCreation(P1),
+            rate_func=linear,
+            run_time=4
+        )
