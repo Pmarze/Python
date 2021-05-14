@@ -574,6 +574,31 @@ class textosv3(Scene):
             FadeOut(title19),
             run_time=3
         )
+class textosf(Scene):
+    def construct(self):
+        title1=TextMobject("P").scale(2).to_edge(np.array([-11,7.75,0]))
+        title2=TextMobject("$=\\frac{1}{}$").scale(2).to_edge(np.array([0,0,0]))
+        title3=TextMobject("f").scale(1.5).to_edge(np.array([12.8,-6,0]))
+        title4=TextMobject("P").scale(3).to_edge(np.array([-10.5,7.25,0]))
+        title5=TextMobject("f").scale(0.5).to_edge(np.array([12.85,-6,0]))
+        title6=TextMobject("P").scale(1).to_edge(np.array([-11,8.25,0]))
+        title7=TextMobject("f").scale(2).to_edge(np.array([12.8,-6,0]))                        
+        self.play(
+            Write(title1),
+            Write(title2),
+            Write(title3),
+            run_time=3
+        )
+        self.play(
+            Transform(title1,title4),
+            Transform(title3,title5),
+            run_time=3
+        )
+        self.play(
+            Transform(title1,title6),
+            Transform(title3,title7),
+            run_time=3
+        )        
 
 class textosv3_2(Scene):
     def construct(self):
