@@ -604,3 +604,109 @@ class textosv3_2(Scene):
             FadeOut(title4),
             run_time=3
         )
+        title5=TextMobject("Geodesica").scale(2).to_edge(np.array([0,3,0]))   
+        title6=TextMobject("Lente gravitacional").scale(2).to_edge(np.array([0,-3,0]))           
+        self.play(
+            Write(title5),
+            Write(title6),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title5),
+            FadeOut(title6),
+            run_time=3
+        )    
+        title7=TextMobject("Albert Einstein").scale(1.5).to_edge(np.array([-3,-2,0]))   
+        title8=TextMobject("1912").scale(2).to_edge(np.array([4,0,0]))           
+        self.play(
+            Write(title7),
+            Write(title8),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title8),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title7),
+            run_time=3
+        )        
+        title9=TextMobject("Espejos").scale(2).to_edge(np.array([-3,2,0]))   
+        title10=TextMobject("Reflexion especular").scale(2).to_edge(np.array([3,0,0]))           
+        title11=TextMobject("Imagen \\\\ virtual").scale(2).to_edge(np.array([-3,3,0]))           
+        self.play(
+            Write(title9),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title9),
+            run_time=3
+        )                     
+        self.play(
+            Write(title10),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title10),
+            run_time=3
+        )
+        self.play(
+            Write(title11),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title11),
+            run_time=3
+        )
+        title12=TextMobject("Espejos planos").scale(2).to_edge(np.array([0,3,0]))   
+        title13=TextMobject("Espejos  curvos").scale(2).to_edge(np.array([0,3,0]))           
+        title14=TextMobject("Espejos convexos").scale(2).to_edge(np.array([0,3,0]))           
+        title15=TextMobject("Espejos concavos").scale(2).to_edge(np.array([0,3,0]))
+        self.play(
+            Write(title12),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title12),
+            run_time=3
+        )                     
+        self.play(
+            Write(title13),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title13),
+            run_time=3
+        )
+        self.play(
+            Write(title14),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title14),
+            run_time=3
+        )                                     
+        self.play(
+            Write(title15),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title15),
+            run_time=3
+        )          
+        self.play(
+            Write(title12),
+            run_time=3
+        )                        
+        self.play(
+            Transform(title12,title13),
+            run_time=3
+        )        
+        self.play(
+            Transform(title12,title14),
+            run_time=3
+        )
+        self.play(
+            Transform(title12,title15),
+            run_time=3
+        )                
