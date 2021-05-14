@@ -368,3 +368,239 @@ class Mano(ThreeDScene):
             rate_func=linear,
             run_time=4
         )
+
+class Max(Scene):
+    def construct(self):
+        title1=TextMobject("Ecuaciones de Maxwell").scale(2)
+        title2=TextMobject("Ecuaciones \\\\ de\\\\ Maxwell").scale(2)
+        title3=TextMobject("$c\\leq 299,792,458~~ m/s$").scale(2)
+        title4=TextMobject("Principio de Fermat").scale(2)
+        self.play(
+            Write(title1),
+            run_time=2
+        )
+        self.play(
+            FadeOut(title1),
+            run_time=2
+        )        
+        self.play(
+            Write(title2),
+            run_time=2
+        )        
+        self.play(
+            FadeOut(title2),
+            run_time=2
+        )
+        self.play(
+            Write(title3),
+            run_time=2
+        )        
+        self.play(
+            FadeOut(title3),
+            run_time=2
+        )           
+        self.play(
+            Write(title4),
+            run_time=2
+        )        
+        self.play(
+            FadeOut(title4),
+            run_time=2
+        )          
+
+class sc1317(Scene):
+    def construct(self):    
+        title1=TextMobject("Ley de Snell").scale(2).to_edge(np.array([-2,2,0]))   
+        title2=TextMobject("Willebrord Snell \\\\ Van Royen").scale(2).to_edge(np.array([-2.5,7,0]))   
+        self.play(
+            Write(title1),
+            run_time=2
+        )
+        self.play(
+            Write(title2),
+            run_time=2
+        )        
+
+class textosv1(Scene):
+    def construct(self):
+        title1=TextMobject("Mecanica\\\\ ondulatoria").to_edge(np.array([-3,0,0]))   
+        title2=TextMobject("Teoria \\\\ electromagnetica\\\\ de la luz").to_edge(np.array([-0,0,0]))  
+        title3=TextMobject("Lentes \\\\ y \\\\ espejos").to_edge(np.array([4,0,0]))  
+        self.play(
+            Write(title1),
+            Write(title2),
+            Write(title3),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title1),
+            FadeOut(title2),
+            FadeOut(title3),
+            run_time=3
+        )
+
+class textosv3(Scene):
+    def construct(self):    
+        title1=TextMobject("LENTES").scale(2).to_edge(np.array([0,2,0]))   
+        title2=TextMobject("Siglo XI D.C.").scale(1.5).to_edge(np.array([3,0,0]))   
+        title3=TextMobject("Siglo VII A.C").scale(1.5).to_edge(np.array([-3,0,0]))   
+        self.play(
+            Write(title1),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title1),
+            run_time=3
+        )
+        self.play(
+            Write(title2),
+            Write(title3),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title2),
+            FadeOut(title3),
+            run_time=3
+        )                
+        title4=TextMobject("Lentes \\\\ convexos").scale(1).to_edge(np.array([3,0,0]))   
+        title5=TextMobject("Lentes \\\\ concavos").scale(1).to_edge(np.array([-3,0,0]))   
+        self.play(
+            Write(title4),
+            Write(title5),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title4),
+            FadeOut(title5),
+            run_time=3
+        )       
+        title6=TextMobject("Lentes convergentes").scale(2).to_edge(np.array([0,3,0]))   
+        title7=TextMobject("Lentes divergentes").scale(2).to_edge(np.array([0,-3,0]))           
+        self.play(
+            Write(title6),
+            Write(title7),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title6),
+            FadeOut(title7),
+            run_time=3
+        )
+        title8=TextMobject("Focos").scale(2).to_edge(np.array([0,0,0]))   
+        title9=TextMobject("Distancia focal").scale(2).to_edge(np.array([0,-3,0]))           
+        title10=TextMobject("d").scale(1).to_edge(np.array([0,3,0])) 
+        self.play(
+            Write(title8),
+            Write(title9),
+            Write(title10),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title8),
+            FadeOut(title9),
+            FadeOut(title10),
+            run_time=3
+        )        
+        title11=TextMobject("$\\frac{1}{d}=P$").scale(2).to_edge(np.array([0,3,0]))   
+        title12=TextMobject("Dioptrias").scale(2).to_edge(np.array([0,-3,0]))           
+        self.play(
+            Write(title11),
+            Write(title12),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title11),
+            FadeOut(title12),
+            run_time=3
+        )       
+        title13=TextMobject("Miopia").scale(2).to_edge(np.array([0,3,0]))   
+        title14=TextMobject("Hipermetropia").scale(2).to_edge(np.array([0,-3,0]))           
+        self.play(
+            Write(title13),
+            Write(title14),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title13),
+            FadeOut(title14),
+            run_time=3
+        )
+        title15=TextMobject("P").scale(1).to_edge(np.array([0,-3,0]))   
+        title16=TextMobject("P").scale(3).to_edge(np.array([0,3,0]))           
+        self.play(
+            Write(title15),
+            run_time=3
+        )
+        self.play(
+            Transform(title15,title16),
+            run_time=4
+        )        
+        self.play(
+            FadeOut(title15),
+            run_time=2
+        )
+        title15=TextMobject("P").scale(1).to_edge(np.array([0,0,0]))   
+        title16=TextMobject("P").scale(3).to_edge(np.array([0,0,0]))           
+        self.play(
+            Write(title15),
+            run_time=3
+        )
+        self.play(
+            Transform(title15,title16),
+            run_time=4
+        )        
+        self.play(
+            FadeOut(title15),
+            run_time=2
+        )        
+        title17=TextMobject("$P=\\frac{1}{f}$").scale(2).to_edge(np.array([0,0,0]))             
+        self.play(
+            Write(title17),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title17),
+            run_time=3
+        )   
+        title18=TextMobject("Lente de Fresnel").scale(2).to_edge(np.array([0,3,0]))   
+        title19=TextMobject("Agustin Jean Fresnel").scale(1).to_edge(np.array([0,-3,0]))           
+        self.play(
+            Write(title18),
+            Write(title19),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title18),
+            FadeOut(title19),
+            run_time=3
+        )
+
+class textosv3_2(Scene):
+    def construct(self):
+        title1=TextMobject("$\\frac{1}{x^2}$").scale(2).to_edge(np.array([0,0,0]))   
+        title2=TextMobject("$x$").scale(2).to_edge(np.array([0,0,0]))           
+        self.play(
+            Write(title2),
+            run_time=3
+        )
+        self.play(
+            Transform(title2,title1),
+            run_time=2
+        )
+        self.wait(1)
+        self.play(
+            FadeOut(title2),
+            run_time=3
+        )
+        title3=TextMobject("Relatividad General").scale(2).to_edge(np.array([0,3,0]))   
+        title4=TextMobject("$G_{\\mu \\nu}+\\Lambda g_{\\mu \\nu}=\\frac{8\\pi G}{c^4}T_{\\mu \\nu}$").scale(2).to_edge(np.array([0,-4,0]))           
+        self.play(
+            Write(title3),
+            Write(title4),
+            run_time=3
+        )
+        self.play(
+            FadeOut(title3),
+            FadeOut(title4),
+            run_time=3
+        )
