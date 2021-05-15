@@ -735,3 +735,363 @@ class textosv3_2(Scene):
             Transform(title12,title15),
             run_time=3
         )                
+
+class Constructiva(Scene):
+    def get1_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 1*(np.sin(5*(x+dx)/2)-1),
+            x_min=-8,x_max=8,
+            color=BLUE_D
+        )
+    def get2_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 1*(np.sin(5*(x+dx)/2)-3),
+            x_min=-8,x_max=8,
+            color=YELLOW_C
+        )
+    def get3_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: (1*(np.sin(5*(x+dx)/2)+1*(np.sin(5*(x+dx)/2))))+2,
+            x_min=-8,x_max=8,
+            color=GREEN_B
+        )
+    def get4_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 1*(np.sin(5*(x+dx)/2)-1),
+            x_min=-8,x_max=8,
+            color=BLUE_D
+        )
+    def get5_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1*(np.sin(5*(x+dx)/2)+3),
+            x_min=-8,x_max=8,
+            color=YELLOW_C
+        )
+    def get6_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: (1*(np.sin(5*(x+dx)/2)-1*(np.sin(5*(x+dx)/2))))+2,
+            x_min=-8,x_max=8,
+            color=GREEN_B
+        )
+    def get7_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 1*(np.sin(2*(x+dx)/2)-1),
+            x_min=-8,x_max=8,
+            color=BLUE_D
+        )
+    def get8_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1*(np.sin(5*(x+dx)/2)+3),
+            x_min=-8,x_max=8,
+            color=YELLOW_C
+        )
+    def get9_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: (1*(np.sin(2*(x+dx)/2)-1)*(np.sin(5*(x+dx)/2)))+2,
+            x_min=-8,x_max=8,
+            color=GREEN_B
+        )        
+    def construct(self):
+        sine1_function=self.get1_sine_wave()
+        sine2_function=self.get2_sine_wave()
+        sine3_function=self.get3_sine_wave()
+        sine4_function=self.get4_sine_wave()
+        sine5_function=self.get5_sine_wave()
+        sine6_function=self.get6_sine_wave()  
+        sine7_function=self.get7_sine_wave()
+        sine8_function=self.get8_sine_wave()
+        sine9_function=self.get9_sine_wave()                
+        d_theta=ValueTracker(0)
+        func1 = lambda t: np.array([t,2,0])
+        func2 = lambda t: np.array([t,-1,0])
+        func3 = lambda t: np.array([t,-3,0])
+        centro1 = ParametricFunction(func1,t_min=-8,t_max=8,color=DARK_GREY)
+        centro2 = ParametricFunction(func2,t_min=-8,t_max=8,color=DARK_GREY)
+        centro3 = ParametricFunction(func3,t_min=-8,t_max=8,color=DARK_GREY)
+        def update1_wave(func):
+            func.become(
+                self.get1_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update2_wave(func):
+            func.become(
+                self.get2_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update3_wave(func):
+            func.become(
+                self.get3_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update4_wave(func):
+            func.become(
+                self.get4_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update5_wave(func):
+            func.become(
+                self.get5_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update6_wave(func):
+            func.become(
+                self.get6_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update7_wave(func):
+            func.become(
+                self.get7_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update8_wave(func):
+            func.become(
+                self.get8_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update9_wave(func):
+            func.become(
+                self.get9_sine_wave(dx=d_theta.get_value())
+            )
+            return func                              
+        sine1_function.add_updater(update1_wave)
+        sine2_function.add_updater(update2_wave)
+        sine3_function.add_updater(update3_wave)
+        sine4_function.add_updater(update4_wave)
+        sine5_function.add_updater(update5_wave)
+        sine6_function.add_updater(update6_wave)
+        sine7_function.add_updater(update7_wave)
+        sine8_function.add_updater(update8_wave)
+        sine9_function.add_updater(update9_wave)        
+        self.play(
+            ShowCreation(centro1),
+            ShowCreation(centro2),
+            ShowCreation(centro3),
+            run_time=2
+        )
+        self.play(
+            ShowCreation(sine7_function),
+            ShowCreation(sine8_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            ShowCreation(sine9_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            Uncreate(sine7_function),
+            Uncreate(sine8_function),
+            Uncreate(sine9_function),
+            run_time=3
+        )
+        self.play(
+            ShowCreation(sine1_function),
+            ShowCreation(sine2_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            ShowCreation(sine3_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            Uncreate(sine1_function),
+            Uncreate(sine2_function),
+            Uncreate(sine3_function),
+            run_time=3
+        )
+        self.play(
+            ShowCreation(sine4_function),
+            ShowCreation(sine5_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            ShowCreation(sine6_function),
+            rate_func=linear,
+            run_time=5
+        )
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=5
+        )        
+
+class Choque(Scene):
+    def get1_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1 if x-dx/2<(-4/2.75)*np.pi else(3*(np.sin(2.75*(x-dx/2)/2))-1 if x-dx/2<(-2/2.75)*np.pi else -1 ),
+            x_min=-8,x_max=8,
+            color=WHITE
+        )
+    def get2_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1 if x+dx/2<(4/2.75)*np.pi else(3*(np.sin(2.75*(x+dx/2)/2))-1 if x+dx/2<(6/2.75)*np.pi else -1 ),
+            x_min=8,x_max=-8,
+            color=WHITE
+        )
+    def construct(self):
+        sine1_function=self.get1_sine_wave()
+        sine2_function=self.get2_sine_wave()        
+        d_theta=ValueTracker(0)
+        func1 = lambda t: np.array([t,0,0])
+        cenro1 = ParametricFunction(func1,t_min=-8,t_max=8,color=DARK_GREY)        
+        def update1_wave(func):
+            func.become(
+                self.get1_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update2_wave(func):
+            func.become(
+                self.get2_sine_wave(dx=d_theta.get_value())
+            )
+            return func            
+        sine1_function.add_updater(update1_wave)
+        sine2_function.add_updater(update2_wave)
+        self.play(
+            ShowCreation(sine1_function),
+            ShowCreation(sine2_function),
+            rate_func=linear,
+            run_time=2
+        )
+        self.play(
+            d_theta.increment_value,8*PI,
+            rate_func=linear,
+            run_time=5
+        )
+
+class Choquesum(Scene):
+    def get1_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1 if x-dx/4<=(-4/2.75)*np.pi else(2.25*(np.sin(2.75*(x-dx/4)/2))-1 if x-dx/4<=(-2/2.75)*np.pi else -1 ),
+            x_min=-8,x_max=8,
+            color=WHITE
+        )
+    def get2_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: -1 if x+dx/4<=(4/2.75)*np.pi else(2.25*(np.sin(2.75*(x+dx/4)/2))-1 if x+dx/4<=(6/2.75)*np.pi else -1 ),
+            x_min=8,x_max=-8,
+            color=WHITE
+        )
+    def get3_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: (2.25*(np.sin(2.75*(x+dx/4)/2))+2.25*(np.sin(2.75*(x-dx/4)/2)))-1,
+            x_min=0,x_max=0.75*np.pi,
+            color=RED_C
+        )        
+    def construct(self):
+        sine1_function=self.get1_sine_wave()
+        sine2_function=self.get2_sine_wave()    
+        sine3_function=self.get2_sine_wave()
+        d_theta=ValueTracker(0)        
+        func1 = lambda t: np.array([0.75*np.pi,t,0])
+        cenro1 = ParametricFunction(func1,t_min=-8,t_max=8,color=DARK_GREY)
+        func2 = lambda t: np.array([-0*np.pi,t,0])
+        cenro2 = ParametricFunction(func2,t_min=-8,t_max=8,color=DARK_GREY)                
+        def update1_wave(func):
+            func.become(
+                self.get1_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update2_wave(func):
+            func.become(
+                self.get2_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        def update3_wave(func):
+            func.become(
+                self.get3_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        sine1_function.add_updater(update1_wave)
+        sine2_function.add_updater(update2_wave)
+        sine3_function.add_updater(update3_wave)
+        self.play(
+            ShowCreation(sine1_function),
+            ShowCreation(sine2_function),
+            ShowCreation(sine3_function),
+            rate_func=linear,
+            run_time=2
+        )
+        self.play(
+            d_theta.increment_value,10*PI,
+            rate_func=linear,
+            run_time=10
+        )        
+        self.wait(2)
+
+class Derecha(Scene):
+    def get1_sine_wave(self,dx=0):
+        return FunctionGraph(
+            lambda x: 0 if x-dx/2<=(-4/1.75)*np.pi else(3.5*(np.sin(1.75*(x-dx/2)/2)) if x-dx/2<=(-2/1.75)*np.pi else 0 ),
+            x_min=-8,x_max=8,
+            color=WHITE
+        )
+    def construct(self):
+        sine1_function=self.get1_sine_wave()
+        d_theta=ValueTracker(0)
+        func1 = lambda t: np.array([t,3.5*(np.sin(3.5*(t/2)/2)),0])
+        onda1 = ParametricFunction(func1,t_min=-2*np.pi,t_max=2*np.pi,color=WHITE)
+        func2 = lambda t: np.array([t,-3.5*(np.sin(3.5*(t/2)/2)),0])
+        onda2 = ParametricFunction(func2,t_min=-2*np.pi,t_max=2*np.pi,color=WHITE)
+        func3 = lambda t: np.array([t,3.5*(np.sin(3.5*(t/2)/2)),0])
+        onda3 = ParametricFunction(func3,t_min=-2*np.pi,t_max=2*np.pi,color=WHITE)
+        def update1_wave(func):
+            func.become(
+                self.get1_sine_wave(dx=d_theta.get_value())
+            )
+            return func
+        sine1_function.add_updater(update1_wave)
+        self.play(
+            ShowCreation(sine1_function),
+            rate_func=linear,
+            run_time=2
+        )
+        self.play(
+            d_theta.increment_value,4*PI,
+            rate_func=linear,
+            run_time=4
+        )
+        self.play(
+            Uncreate(sine1_function),
+            run_time=3
+        )
+        self.play(
+            ShowCreation(onda1),
+            run_time=3
+        )
+        for i in range(0,3):
+            self.play(
+                Transform(onda1,onda2),
+                rate_func=linear,
+                run_time=2
+            )
+            self.play(
+                Transform(onda1,onda3),
+                rate_func=linear,
+                run_time=2
+            )        
+
+class Fourier(Scene):
+    def construct(self):
+        title1=TextMobject("Transformada \\\\ de \\\\ Fourier").scale(2).to_edge(np.array([0,2,0]))
+        title2=TextMobject("$\\int_{-\\infty}^\\infty f(x)e^{-i\\omega t}dt$").scale(2).to_edge(np.array([0,-2,0]))
+        title3=TextMobject("$\\int \\limits_{-\\infty}^{\\infty} f(x)e^{-i\\omega t}dt$").scale(2).to_edge(np.array([0,-2,0]))
+        
+        self.play(
+            Write(title1),
+            Write(title2),
+            run_time=3
+        )
